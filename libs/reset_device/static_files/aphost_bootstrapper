@@ -4,6 +4,8 @@ echo "hello world" &> /home/pi/test1234.txt
 
 python3 /usr/lib/raspiwifi/reset_device/reset.py &> /home/pi/reset_test.txt &
 
+service lighttpd stop &> /home/pi/service_test.txt &
+
 python3 /usr/lib/raspiwifi/configuration_app/app.py &> /home/pi/app_test.txt &
 
 hostapd -dd /etc/hostapd/hostapd.conf &> /home/pi/host_test.txt &
