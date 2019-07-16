@@ -32,11 +32,13 @@ def wpa_settings():
 def save_credentials():
     ssid = request.form['ssid']
     wifi_key = request.form['wifi_key']
+    open('~/form.txt','w').write(str(request.form))
+    lat = request.form['latitude']
+    lon = request.form['longitude']
 
     create_wpa_supplicant(ssid, wifi_key)
     
-    lat = request.form['latitude']
-    lon = request.form['longitude']
+    
     
     set_lat_and_lon(lat,lon)
     
