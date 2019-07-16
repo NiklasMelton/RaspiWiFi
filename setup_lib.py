@@ -27,6 +27,7 @@ def copy_configs(wpa_enabled_choice):
 	
 	os.system('mv /etc/dhcpcd.conf /etc/dhcpcd.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dhcpcd.conf /etc/')
+	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd /etc/default/')
 	os.system('mkdir /etc/cron.raspiwifi')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
 	os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
