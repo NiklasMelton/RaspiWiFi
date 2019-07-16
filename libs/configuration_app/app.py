@@ -35,8 +35,8 @@ def save_credentials():
 
     create_wpa_supplicant(ssid, wifi_key)
     
-    lat = request.form['lat']
-    lon = request.form['lon']
+    lat = request.form['latitude']
+    lon = request.form['longitude']
     
     set_lat_and_lon(lat,lon)
     
