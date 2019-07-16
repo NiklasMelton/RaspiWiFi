@@ -13,13 +13,14 @@ app.debug = True
 def index():
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()
-
-    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
+    lat,lon = load_lat_and_lon()
+    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash,lat=lat,lon=lon)
 
 
 @app.route('/manual_ssid_entry')
 def manual_ssid_entry():
-    return render_template('manual_ssid_entry.html')
+    lat,lon = load_lat_and_lon()
+    return render_template('manual_ssid_entry.html',lat=lat,lon=lon)
 
 @app.route('/wpa_settings')
 def wpa_settings():
@@ -34,6 +35,11 @@ def save_credentials():
 
     create_wpa_supplicant(ssid, wifi_key)
     
+    lat = request.form['lat']
+    lon = request.form['lon']
+    
+    set_lat_and_lon(lat,lon)
+    
     # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
     # the response from getting to the browser
     def sleep_and_start_ap():
@@ -42,7 +48,7 @@ def save_credentials():
     t = Thread(target=sleep_and_start_ap)
     t.start()
 
-    return render_template('save_credentials.html', ssid = ssid)
+    return render_template('save_credentials.html', ssid = ssid, lat=lat, lon=lon)
 
 
 @app.route('/save_wpa_credentials', methods = ['GET', 'POST'])
@@ -50,6 +56,7 @@ def save_wpa_credentials():
     config_hash = config_file_hash()
     wpa_enabled = request.form.get('wpa_enabled')
     wpa_key = request.form['wpa_key']
+    
 
     if str(wpa_enabled) == '1':
         update_wpa(1, wpa_key)
@@ -103,6 +110,25 @@ def create_wpa_supplicant(ssid, wifi_key):
     temp_conf_file.close
 
     os.system('mv wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
+    
+def set_lat_and_lon(lat,lon):
+    template = open('/usr/lib/raspiwifi/reset_device/static_files/config.js','r').read()
+    formatted_template = template.format(lat,lon)
+    open('/usr/share/dump1090-mutability/lat_lon.log','w').writelines([str(lat),str(lon)])
+    open('config.js.tmp','w').write(formatted_template)
+    os.system('mv config.js.tmp /usr/share/dump1090-mutability/html/config.js')
+    
+def load_lat_and_lon():
+    if os.path.exists('/usr/share/dump1090-mutability/lat_lon.log'):
+        data = open('/usr/share/dump1090-mutability/lat_lon.log','r').readlines()
+        lat = data[0]
+        lon = data[1]
+    else:
+        lat = '51.4934'
+        lon = '0.0000'
+    return lat, lon
+    
+    
 
 def set_ap_client_mode():
     os.system('rm -f /etc/raspiwifi/host_mode')
