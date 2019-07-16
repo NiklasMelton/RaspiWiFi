@@ -2,4 +2,6 @@
 
 python3 /usr/lib/raspiwifi/reset_device/reset.py &
 
+service lighttpd start &> /home/pi/service_test.txt &
+
 python3 /usr/lib/raspiwifi/reset_device/connection_monitor.py &
