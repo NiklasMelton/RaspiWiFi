@@ -27,9 +27,9 @@ ShowOtherUnits = true;
 
 // Default center of the map.
 //DefaultCenterLat = 37.962610;
-DefaultCenterLat = {};
+DefaultCenterLat = $DUMMYLAT$;
 //DefaultCenterLon = -91.782340;
-DefaultCenterLon = {};
+DefaultCenterLon = $DUMMYLON$;
 // The google maps zoom level, 0 - 16, lower is further out
 DefaultZoomLvl   = 9;
 
