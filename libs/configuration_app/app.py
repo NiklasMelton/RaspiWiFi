@@ -32,7 +32,6 @@ def wpa_settings():
 def save_credentials():
     ssid = request.form['ssid']
     wifi_key = request.form['wifi_key']
-    open('/home/pi/form.txt','w').write(str(request.form))
     lat = request.form['latitude']
     lon = request.form['longitude']
 
