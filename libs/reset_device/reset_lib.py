@@ -78,7 +78,7 @@ def is_wifi_active():
 
 def reset_to_host_mode():
 	os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
-	#os.system('rm -f /home/pi/Projects/RaspiWifi/tmp/*')
+	os.system('rm -f /home/pi/Projects/RaspiWifi/tmp/*')
 	os.system('rm /etc/cron.raspiwifi/apclient_bootstrapper')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi/')
 	os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
