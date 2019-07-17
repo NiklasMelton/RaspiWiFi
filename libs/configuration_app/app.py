@@ -116,13 +116,13 @@ def create_wpa_supplicant(ssid, wifi_key):
 def set_lat_and_lon(lat,lon):
     template = open('/usr/lib/raspiwifi/reset_device/static_files/config.js','r').read()
     formatted_template = template.replace('$DUMMYLAT$',lat).replace('$DUMMYLON$',lon)
-    open('/usr/share/dump1090-mutability/lat_lon.log','w').writelines([str(lat),str(lon)])
+    open('/usr/share/dump1090-mutability/lat_lon.log','w').write(','.join([str(lat),str(lon)]))
     open('config.js.tmp','w').write(formatted_template)
     os.system('mv config.js.tmp /usr/share/dump1090-mutability/html/config.js')
     
 def load_lat_and_lon():
     if os.path.exists('/usr/share/dump1090-mutability/lat_lon.log'):
-        data = open('/usr/share/dump1090-mutability/lat_lon.log','r').readlines()
+        data = open('/usr/share/dump1090-mutability/lat_lon.log','r').read().split(',')
         lat = data[0]
         lon = data[1]
     else:
