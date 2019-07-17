@@ -15,7 +15,9 @@
       </ul>
     </div>
 
-    <h1>WiFi Setup</h1>
+    <h1>ADS-B Frame Setup</h1>
+    <h2>Connect to the FrameSetup WiFi network</h2>
+    <h2>Navigate to https://setup.com</h2>
     <div class="wifiIcon"></div>
 
     <form action="{{ url_for('save_credentials') }}" method=post>
@@ -36,9 +38,10 @@
         <li><input type="password" name="wifi_key", class="wifiNetworkInputs"></li>
 
         <li><label for="latitude">Device Latitude</label></li>
-        <li><input type="text",value="testing", name="latitude", class="wifiNetworkInputs",autocomplete="off"></li>
+        <li><input type="text",value="testing", name="latitude", class="wifiNetworkInputs"></li>
+        
         <li><label for="longitude">Device Longitude</label></li>
-        <li><input type="text",value="testing",name="longitude", class="wifiNetworkInputs", autocomplete="off"></li>
+        <li><input type="text",value="testing", name="longitude", class="wifiNetworkInputs"></li>
         
         <input type="submit", class="wifiConnectButton">
       </ul>
