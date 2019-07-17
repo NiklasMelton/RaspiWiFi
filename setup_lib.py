@@ -20,11 +20,8 @@ def copy_configs(wpa_enabled_choice):
 	os.system('mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dnsmasq.conf /etc/')
 
-	if wpa_enabled_choice.lower() == "y":
-		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.wpa /etc/hostapd/hostapd.conf')
-	else:
-		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.nowpa /etc/hostapd/hostapd.conf')
-	
+	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.wpa /etc/hostapd/hostapd.conf')
+
 	os.system('mv /etc/dhcpcd.conf /etc/dhcpcd.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dhcpcd.conf /etc/')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd /etc/default/')
