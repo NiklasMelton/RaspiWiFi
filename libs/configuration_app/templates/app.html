@@ -5,8 +5,8 @@
     <div id="wpaStatus">
       <ul>
         {% if config_hash['wpa_enabled'] == '1': %}
-          <li><a href="{{ url_for('wpa_settings') }}">Config. Mode WPA: ENABLED</a></li>
-          <li><a href="{{ url_for('wpa_settings') }}">Key: {{ config_hash['wpa_key'] }}</a></li>
+          <li>Config. Mode WPA: ENABLED</li>
+          <li>Key: {{ config_hash['wpa_key'] }}</li>
         {% endif %}
 
         {% if config_hash['wpa_enabled'] == '0': %}
@@ -16,7 +16,7 @@
     </div>
 
     <h1>ADS-B Frame Setup</h1>
-    <h2>Connect to the FrameSetup WiFi network</h2>
+    <h2>Connect to the <option value="&quot;asd">FrameSetup</option> WiFi network</h2>
     <h2>Navigate to http://setup.com</h2>
     <h1> </h1>
     <div class="wifiIcon"></div>
