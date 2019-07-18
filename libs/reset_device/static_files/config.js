@@ -39,7 +39,7 @@ DefaultZoomLvl   = $DUMMYZOOM$;
 SiteShow    = false;           // true to show a center marker
 SiteLat     = DefaultCenterLat;            // position of the marker
 SiteLon     = DefaultCenterLon;
-SiteName    = "Rolla"; // tooltip of the marker
+SiteName    = "Home"; // tooltip of the marker
 
 // -- Marker settings -------------------------------------
 
@@ -101,7 +101,7 @@ OutlineMlatColor = '#4040FF';
 
 SiteCircles = true; // true to show circles (only shown if the center marker is shown)
 // In nautical miles or km (depending settings value 'Metric')
-SiteCirclesDistances = new Array(25,50,75);
+SiteCirclesDistances = new Array($DUMMYRING0$,$DUMMYRING1$,$DUMMYRING2$);
 
 // Show the clocks at the top of the righthand pane? You can disable the clocks if you want here
 ShowClocks = true;
