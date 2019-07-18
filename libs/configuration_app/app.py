@@ -120,18 +120,21 @@ def set_lat_and_lon(lat,lon, zoom, ring):
     ring = int(ring)
     for i in range(3):
         formatted_template = formatted_template.replace('$DUMMYRING{}$'.format(i),str(int(ring*(1+i))))
-    open('/usr/share/dump1090-mutability/lat_lon.log','w').write(','.join([str(lat),str(lon)]))
+    open('/usr/share/dump1090-mutability/lat_lon.log','w').write(','.join([str(lat),str(lon),str(zoom),str(ring)]))
     open('config.js.tmp','w').write(formatted_template)
     os.system('mv config.js.tmp /usr/share/dump1090-mutability/html/config.js')
     
 def load_lat_and_lon():
+    valid = False
     if os.path.exists('/usr/share/dump1090-mutability/lat_lon.log'):
         data = open('/usr/share/dump1090-mutability/lat_lon.log','r').read().split(',')
-        lat = data[0]
-        lon = data[1]
-        zoom = data[2]
-        ring = data[3]
-    else:
+        if len(data) == 4:
+            lat = data[0]
+            lon = data[1]
+            zoom = data[2]
+            ring = data[3]
+            valid = True
+    if not valid:
         lat = '51.4934'
         lon = '0.0000'
         zoom = '9'
