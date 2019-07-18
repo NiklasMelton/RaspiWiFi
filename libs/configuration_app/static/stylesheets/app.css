@@ -55,6 +55,8 @@ div#wpaStatus{
 div#wpaStatus a{
     color: #fff;
 }
+label[for=zoom],
+label[for=ring],
 label[for=latitude],
 label[for=longitude],
 label[for=ssid],
