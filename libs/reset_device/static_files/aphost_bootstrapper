@@ -9,3 +9,5 @@ service lighttpd stop &> /home/pi/service_test.txt &
 python3 /usr/lib/raspiwifi/configuration_app/app.py &> /home/pi/app_test.txt &
 
 hostapd -dd /etc/hostapd/hostapd.conf &> /home/pi/host_test.txt &
+
+service hostapd force-reload
