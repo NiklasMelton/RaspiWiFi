@@ -13,14 +13,14 @@ app.debug = True
 def index():
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()
-    lat,lon = load_lat_and_lon()
-    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash,lat=lat,lon=lon)
+    lat,lon,zoom,ring = load_lat_and_lon()
+    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash,lat=lat,lon=lon,zoom,ring)
 
 
 @app.route('/manual_ssid_entry')
 def manual_ssid_entry():
-    lat,lon = load_lat_and_lon()
-    return render_template('manual_ssid_entry.html',lat=lat,lon=lon)
+    lat,lon,zoom,ring = load_lat_and_lon()
+    return render_template('manual_ssid_entry.html',lat=lat,lon=lon,zoom,ring)
 
 @app.route('/wpa_settings')
 def wpa_settings():
@@ -34,12 +34,14 @@ def save_credentials():
     wifi_key = request.form['wifi_key']
     lat = request.form['latitude']
     lon = request.form['longitude']
+    zoom = request.form['zoom']
+    ring = request.form['ring']
 
     create_wpa_supplicant(ssid, wifi_key)
     
     
     
-    set_lat_and_lon(lat,lon)
+    set_lat_and_lon(lat,lon,zoom,ring)
     
     # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
     # the response from getting to the browser
@@ -112,9 +114,12 @@ def create_wpa_supplicant(ssid, wifi_key):
 
     os.system('mv wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
     
-def set_lat_and_lon(lat,lon):
+def set_lat_and_lon(lat,lon, zoom, ring):
     template = open('/usr/lib/raspiwifi/reset_device/static_files/config.js','r').read()
-    formatted_template = template.replace('$DUMMYLAT$',lat).replace('$DUMMYLON$',lon)
+    formatted_template = template.replace('$DUMMYLAT$',lat).replace('$DUMMYLON$',lon).replace('$DUMMYZOOM$',zoom)
+    ring = int(ring)
+    for i in range(3):
+        formatted_template = formatted_template.replace('$DUMMYRING{}&'.format(i),ring*(1+i))
     open('/usr/share/dump1090-mutability/lat_lon.log','w').write(','.join([str(lat),str(lon)]))
     open('config.js.tmp','w').write(formatted_template)
     os.system('mv config.js.tmp /usr/share/dump1090-mutability/html/config.js')
@@ -124,10 +129,14 @@ def load_lat_and_lon():
         data = open('/usr/share/dump1090-mutability/lat_lon.log','r').read().split(',')
         lat = data[0]
         lon = data[1]
+        zoom = data[2]
+        ring = data[3]
     else:
         lat = '51.4934'
         lon = '0.0000'
-    return lat, lon
+        zoom = '9'
+        ring = '25'
+    return lat, lon, zoom, ring
     
     
 
