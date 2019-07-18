@@ -14,13 +14,13 @@ def index():
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()
     lat,lon,zoom,ring = load_lat_and_lon()
-    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash,lat=lat,lon=lon,zoom,ring)
+    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash,lat=lat,lon=lon,zoom=zoom,ring=ring)
 
 
 @app.route('/manual_ssid_entry')
 def manual_ssid_entry():
     lat,lon,zoom,ring = load_lat_and_lon()
-    return render_template('manual_ssid_entry.html',lat=lat,lon=lon,zoom,ring)
+    return render_template('manual_ssid_entry.html',lat=lat,lon=lon,zoom=zoom,ring=ring)
 
 @app.route('/wpa_settings')
 def wpa_settings():
