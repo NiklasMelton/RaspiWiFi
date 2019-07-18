@@ -31,7 +31,7 @@ DefaultCenterLat = $DUMMYLAT$;
 //DefaultCenterLon = -91.782340;
 DefaultCenterLon = $DUMMYLON$;
 // The google maps zoom level, 0 - 16, lower is further out
-DefaultZoomLvl   = 9;
+DefaultZoomLvl   = $DUMMYZOOM$;
 
 // Center marker. If dump1090 provides a receiver location,
 // that location is used and these settings are ignored.
