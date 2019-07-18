@@ -4,21 +4,15 @@
   <div id="mainContent">
     <div id="wpaStatus">
       <ul>
-        {% if config_hash['wpa_enabled'] == '1': %}
-          <li>Config. Mode WPA: ENABLED</li>
+          <li>Network: FrameSetup</li>
           <li>Key: {{ config_hash['wpa_key'] }}</li>
-        {% endif %}
-
-        {% if config_hash['wpa_enabled'] == '0': %}
-          <li><a href="{{ url_for('wpa_settings') }}">Config. Mode WPA: DISABLED</a></li>
-      {% endif %}
       </ul>
     </div>
 
     <h1>ADS-B Frame Setup</h1>
-    <h2>Connect to the <option value="&quot;asd">FrameSetup</option> WiFi network</h2>
-    <h2>Navigate to http://setup.com</h2>
-    <h1> </h1>
+    <p><h2>Connect to the <q>FrameSetup</q> WiFi network</h2>
+    <h2>Navigate to <q>setup.com</q></h2><p>
+    <p> </p>
     <div class="wifiIcon"></div>
 
     <form action="{{ url_for('save_credentials') }}" method=post>
@@ -38,7 +32,9 @@
         <li><label for="wifi_key">Your Wifi password</label></li>
         <li><input type="password", name="wifi_key", class="wifiNetworkInputs"></li>
         
-        <img src="globe.png", width="50" height="50">
+        <p> </p>
+        
+        <img src="/static/globe.png", width="100" height="100">
 
         <li><label for="latitude">Device Latitude</label></li>
         <li><input type="text", value= '{{ lat }}', name="latitude", class="wifiNetworkInputs"></li>
