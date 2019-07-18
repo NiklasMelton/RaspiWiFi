@@ -19,7 +19,13 @@
         <li><label for="longitude">Device Longitude</label></li>
         <li><input type="text", value='{{ lon }}', name="longitude", class="wifiNetworkInputs"></li>
 
-        <input type="submit", class="wifiConnectButton">
+        <li><label for="zoom">Map Level (0-16)</label></li>
+        <l1><input type="number", name="zoom", min="0", max="16", value='{{ zoom }}', class="wifiNetworkInputs"></li>
+        
+        <li><label for="zoom">Ring Spacing in Nautical Miles</label></li>
+        <l1><input type="number", name="ring", min="0", max="100", value='{{ ring }}', class="wifiNetworkInputs"></li>
+        
+        <input type="submit", class="wifiConnectButton", value='submit'>
       </ul>
     </form>
   </div>
