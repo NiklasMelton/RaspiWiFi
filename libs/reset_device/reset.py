@@ -33,11 +33,13 @@ while True:
         print(counter)
 
         if counter == 5:
-            reset_lib.reset_to_host_mode()
+#             reset_lib.reset_to_host_mode()
+            print('reset to host')
 
         if GPIO.input(3) == 0:
             if 2 < counter < 5:
-                os.system('reboot')
+#                 os.system('reboot')
+                print('reboot')
             counter = 0
             break
     time.sleep(1)
