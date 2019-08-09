@@ -27,7 +27,7 @@ if reboot_required == True:
 # If that happens the device will reset to its AP Host mode allowing for reconfiguration on a new network.
 while True:
     while GPIO.input(3) == 0:
-        time.sleep(1)
+        time.sleep(0.8)
         counter = counter + 1
 
         print(counter)
@@ -37,7 +37,7 @@ while True:
             print('reset to host')
 
         if GPIO.input(3) == 1:
-            if 2 < counter < 5:
+            if 2 <= counter < 5:
 #                 os.system('reboot')
                 print('reboot')
             counter = 0
