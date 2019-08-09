@@ -20,6 +20,8 @@ reboot_required = reset_lib.wpa_check_activate(config_hash['wpa_enabled'], confi
 
 if reboot_required == True:
     os.system('reboot')
+    
+time.sleep(20)
 
 # This is the main logic loop waiting for a button to be pressed on GPIO 18 for 10 seconds.
 # If that happens the device will reset to its AP Host mode allowing for reconfiguration on a new network.
@@ -29,9 +31,6 @@ while True:
         counter = counter + 1
 
         print(counter)
-        
-        if counter == 2:
-            do_reboot = True
 
         if counter == 5:
             reset_lib.reset_to_host_mode()
