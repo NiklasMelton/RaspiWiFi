@@ -5,7 +5,7 @@ import subprocess
 import reset_lib
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 counter = 0
 serial_last_four = subprocess.check_output(['cat', '/proc/cpuinfo'])[-5:-1].decode('utf-8')
@@ -24,17 +24,21 @@ if reboot_required == True:
 # This is the main logic loop waiting for a button to be pressed on GPIO 18 for 10 seconds.
 # If that happens the device will reset to its AP Host mode allowing for reconfiguration on a new network.
 while True:
-    while GPIO.input(18) == 1:
+    while GPIO.input(3) == 1:
         time.sleep(1)
         counter = counter + 1
 
         print(counter)
+        
+        if counter == 2:
+            do_reboot = True
 
-        if counter == 9:
+        if counter == 5:
             reset_lib.reset_to_host_mode()
 
-        if GPIO.input(18) == 0:
+        if GPIO.input(3) == 0:
+            if 2 < counter < 5:
+                os.system('reboot')
             counter = 0
             break
-
     time.sleep(1)
