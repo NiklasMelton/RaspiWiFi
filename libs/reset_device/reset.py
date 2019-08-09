@@ -21,7 +21,7 @@ reboot_required = False
 if reboot_required == True:
     os.system('reboot')
     
-time.sleep(20)
+# time.sleep(20)
 
 # This is the main logic loop waiting for a button to be pressed on GPIO 18 for 10 seconds.
 # If that happens the device will reset to its AP Host mode allowing for reconfiguration on a new network.
