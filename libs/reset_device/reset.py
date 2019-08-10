@@ -38,8 +38,8 @@ while True:
 
         if GPIO.input(3) == 1:
             if 2 <= counter < 5:
-                os.system('reboot')
-                print('reboot')
+                print('shutdown')
+                os.system('shutdown 0')
             counter = 0
             break
     time.sleep(1)
